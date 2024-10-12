@@ -1,16 +1,17 @@
 [tool.poetry]
-name = "landing-page-crew"
+name = "landing_page_generator"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
-python = ">=3.10.0,<3.12"
-crewai = "^0.11.0"
-unstructured = '==0.10.25'
-tools = "^0.1.9"
-tasks = "^2.8.0"
-python-dotenv = "1.0.0"
+python = ">=3.11,<=3.13"
+python-dotenv = "^1.0.1"
+crewai = {extras = ["tools"], version = "^0.63.6"}
+
+[tool.poetry.scripts]
+landing_page_generator = "landing_page_generator.main:run"
+train = "landing_page_generator.main:train"
 
 [tool.pyright]
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md

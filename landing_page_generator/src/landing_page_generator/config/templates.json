@@ -1,0 +1,14 @@
+[
+    {
+      "name": "tailwind-dashboard-template",
+      "theme": "Responsive admin dashboard",
+      "folder": "tailwind-dashboard-template-mosaic",
+      "description": "a responsive admin dashboard. It's a great starting for anyone who wants to create a user interface for SaaS products, administrator dashboards, modern web apps, and more."
+    },
+    {
+      "name": "Simple Light",
+      "theme": "Personal Website Template",
+      "folder": "tailwind-landing-page-template-simple-light",
+      "description": "A personal website so nice you’ll actually be inspired to publish on it."
+    }
+]

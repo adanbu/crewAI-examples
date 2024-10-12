@@ -1,0 +1,30 @@
+agent="Senior React Engineer"
+2024-10-10 17:06:24: task=Learn the templates options choose and copy  the one that suits the idea below the best,  YOU MUST COPY, and then YOU MUST read the src/components  in the directory you just copied, to decide what  component files should be updated to make the  landing page about the idea below.
+- YOU MUST READ THE DIRECTORY BEFORE CHOOSING THE FILES.       - YOU MUST NOT UPDATE any Pricing components. - YOU MUST UPDATE ONLY the 4 most important components.
+2024-10-10 17:06:24: status=started
+agent="Senior React Engineer"
+2024-10-10 17:07:56: task=[]2024-10-10 17:07:56: status=completed
+agent="Senior React Engineer"
+2024-10-10 17:57:51: task=Learn the templates options choose and copy  the one that suits the idea below the best,  YOU MUST COPY the whole folder, location can be found at folder entry in the templates.json, and then YOU MUST read the src/components  in the directory you just copied, to decide what  component files should be updated to make the  landing page about the idea below.
+- YOU MUST READ THE DIRECTORY BEFORE CHOOSING THE FILES.       - YOU MUST NOT UPDATE any Pricing components. - YOU MUST UPDATE ONLY the 4 most important components.
+2024-10-10 17:57:51: status=started
+agent="Senior React Engineer"
+2024-10-10 17:58:43: task=```json
+[
+    "templates/tailwind-dashboard-template/src/pages/Dashboard.jsx",
+    "templates/tailwind-dashboard-template/src/partials/Header.jsx",
+    "templates/tailwind-dashboard-template/src/partials/Sidebar.jsx",
+    "templates/tailwind-dashboard-template/src/partials/dashboard/DashboardCard01.jsx"
+]
+```2024-10-10 17:58:43: status=completed
+agent="Senior React Engineer"
+2024-10-10 18:08:10: task=Learn the templates options choose and copy  the one that suits the idea below the best,  YOU MUST COPY the whole folder, location can be found at folder entry in the templates.json, and then YOU MUST read the src/components  in the directory you just copied, to decide what  component files should be updated to make the  landing page about the idea below.
+- YOU MUST READ THE DIRECTORY BEFORE CHOOSING THE FILES.       - YOU MUST NOT UPDATE any Pricing components. - YOU MUST UPDATE ONLY the 4 most important components.
+2024-10-10 18:08:10: status=started
+agent="Senior React Engineer"
+2024-10-10 18:09:07: task=[
+  "./tailwind-dashboard-template/src/components/Dashboard.js",
+  "./tailwind-dashboard-template/src/components/Sidebar.js",
+  "./tailwind-dashboard-template/src/components/Metrics.js",
+  "./tailwind-dashboard-template/src/components/Notifications.js"
+]2024-10-10 18:09:07: status=completed
