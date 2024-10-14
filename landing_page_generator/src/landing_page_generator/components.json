@@ -1,0 +1,6 @@
+[
+    "./workdir/tailwind-landing-page-template-simple-light/app/layout.tsx",
+    "./workdir/tailwind-landing-page-template-simple-light/components/hero-home.tsx",
+    "./workdir/tailwind-landing-page-template-simple-light/components/cta.tsx",
+    "./workdir/tailwind-landing-page-template-simple-light/components/banner.tsx"
+]

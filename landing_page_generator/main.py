@@ -65,7 +65,6 @@ class LandingPageCrew():
     return components
 
   def __update_components(self, components, expanded_idea):
-    ##############remember to add this part
     components = components.replace("\n", "").replace(" ",
                                                       "").replace("```", "")
     components = json.loads(components)

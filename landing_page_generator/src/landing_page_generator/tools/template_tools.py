@@ -14,12 +14,18 @@ class LearnLandingPageOptionsSchema(BaseModel):
     pass  # No input needed for this tool
 
 
-class LearnLandingPageOptionsTool(JSONSearchTool):
-    name: str = "Learn Landing Page Options"
+class LearnLandingPageOptionsTool(BaseTool):
+    name: str = "Learn the templates at your disposal"
     description: str = "A tool that provides available landing page templates."
-    #args_schema: Type[BaseModel] = LearnLandingPageOptionsSchema
+    args_schema: Type[BaseModel] = LearnLandingPageOptionsSchema
+
+    def _run(self, **kwargs: Any) -> Any:
+        
+        templates = json.load(open("config/templates.json"))
+        return json.dumps(templates, indent=2)
 
 
+ 
 class CopyLandingPageTemplateSchema(BaseModel):
     """Input for CopyLandingPageTemplateTool."""
     landing_page_template: str = Field(
@@ -36,4 +42,4 @@ class CopyLandingPageTemplateTool(BaseTool):
         destination_path = Path(f"workdir/{landing_page_template}")
         destination_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copytree(source_path, destination_path)
-        return f"Template copied to {landing_page_template} and ready to be modified. Main files should be under ./{landing_page_template}/src/components."
+        return f"Template copied to {landing_page_template} and ready to be modified."

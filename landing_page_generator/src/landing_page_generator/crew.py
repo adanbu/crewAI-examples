@@ -1,8 +1,8 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from tools.template_tools import CopyLandingPageTemplateTool
-
-from crewai_tools import WebsiteSearchTool, ScrapeWebsiteTool, DirectoryReadTool, FileWriterTool, FileReadTool,JSONSearchTool
+from tools.template_tools import CopyLandingPageTemplateTool,LearnLandingPageOptionsTool
+from tools.directory_tools import ListDirectoriesInDirectoryTool
+from crewai_tools import SerperDevTool, ScrapeWebsiteTool, DirectoryReadTool, FileWriterTool, FileReadTool,JSONSearchTool
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -19,7 +19,7 @@ class ExpandIdeaCrew:
              config=self.agents_config['senior_idea_analyst'],
              allow_delegation=False,
              tools=[
-               WebsiteSearchTool(),
+               SerperDevTool(),
                ScrapeWebsiteTool()],
              verbose=True
         )
@@ -30,7 +30,7 @@ class ExpandIdeaCrew:
              config=self.agents_config['senior_strategist'],
              allow_delegation=False,
              tools=[
-               WebsiteSearchTool(),
+               SerperDevTool(),
                ScrapeWebsiteTool()],
              verbose=True
         )
@@ -71,13 +71,35 @@ class ChooseTemplateCrew:
              config=self.agents_config['senior_react_engineer'],
              allow_delegation=False,
              tools=[
-              WebsiteSearchTool(),
-              ScrapeWebsiteTool(),
-              JSONSearchTool('config/templates.json'),
+              
+              LearnLandingPageOptionsTool(),
               CopyLandingPageTemplateTool(),
               FileWriterTool(),
               FileReadTool(),
-               DirectoryReadTool()
+               DirectoryReadTool(),
+               ListDirectoriesInDirectoryTool()
+              ],
+             verbose=True
+        )
+     
+     @agent
+     def senior_react_engineer_helper1_agent(self) -> Agent:
+        return Agent(
+             config=self.agents_config['senior_react_engineer'],
+             allow_delegation=False,
+             tools=[
+               ListDirectoriesInDirectoryTool()
+              ],
+             verbose=True
+        )
+     
+     @agent
+     def senior_react_engineer_helper2_agent(self) -> Agent:
+        return Agent(
+             config=self.agents_config['senior_react_engineer'],
+             allow_delegation=False,
+             tools=[
+                DirectoryReadTool()
               ],
              verbose=True
         )
@@ -88,13 +110,35 @@ class ChooseTemplateCrew:
             config=self.tasks_config['choose_template_task'],
             agent=self.senior_react_engineer_agent(),
         )
-     
+   
      @task
-     def update_page(self) -> Task: 
+     def copy_template(self) -> Task: 
         return Task(
-            config=self.tasks_config['update_page_task'],
+            config=self.tasks_config['copy_template_task'],
             agent=self.senior_react_engineer_agent(),
         )
+     
+     @task
+     def choose_relevant_directories(self) -> Task: 
+        return Task(
+            config=self.tasks_config['choose_relevant_directories_task'],
+            agent=self.senior_react_engineer_helper1_agent(),
+        )
+      
+     
+     @task
+     def choose_components_to_update(self) -> Task: 
+        return Task(
+            config=self.tasks_config['choose_components_to_update_task'],
+            agent=self.senior_react_engineer_helper2_agent(),
+        )
+     
+   #   @task
+   #   def update_page(self) -> Task: 
+   #      return Task(
+   #          config=self.tasks_config['update_page_task'],
+   #          agent=self.senior_react_engineer_agent(),
+   #      )
      
      @crew
      def crew(self) -> Crew:
@@ -121,8 +165,7 @@ class CreateContentCrew:
              config=self.agents_config['senior_content_editor'],
              allow_delegation=False,
              tools=[
-               WebsiteSearchTool(),
-              ScrapeWebsiteTool()],
+               ],
              verbose=True
         )
      
@@ -132,10 +175,6 @@ class CreateContentCrew:
              config=self.agents_config['senior_react_engineer'],
              allow_delegation=False,
              tools=[
-               WebsiteSearchTool(),
-              ScrapeWebsiteTool(),
-              JSONSearchTool('config/templates.json'),
-              CopyLandingPageTemplateTool(),
               FileWriterTool(),
               FileReadTool(),
               DirectoryReadTool()
@@ -146,7 +185,7 @@ class CreateContentCrew:
      @task
      def create_content(self) -> Task: 
         return Task(
-            config=self.tasks_config['component_content_tas'],
+            config=self.tasks_config['create_component_content_task'],
             agent=self.senior_content_editor_agent(),
         )
      
@@ -158,11 +197,18 @@ class CreateContentCrew:
         )
      
      @task
-     def qa_component(self) -> Task: 
+     def write_updated_component(self) -> Task: 
         return Task(
-            config=self.tasks_config['qa_component_task'],
-            agent=self.senior_content_editor_agent(),
+            config=self.tasks_config['write_updated_component_task'],
+            agent=self.senior_react_engineer_agent(),
         )
+     
+   #   @task
+   #   def qa_component(self) -> Task: 
+   #      return Task(
+   #          config=self.tasks_config['qa_component_task'],
+   #          agent=self.senior_content_editor_agent(),
+   #      )
      
      @crew
      def crew(self) -> Crew:

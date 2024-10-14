@@ -30,27 +30,79 @@ refine_idea_task:
     YOU MUST RETURN THE COMPLETE IDEA REPORT AND 
     THE DETAILS, You'll get a $100 tip if you do your best work!
 
+# choose_template_task:
+#   description: >
+#     Learn the templates options choose and copy 
+#     the one that suits the idea below the best, 
+#     YOU MUST COPY the whole folder, location can be found at folder entry in the templates.json, and then YOU MUST read the src/components 
+#     in the directory you just copied, to decide what 
+#     component files should be updated to make the 
+#     landing page about the idea below.
+
+#     - YOU MUST READ THE DIRECTORY BEFORE CHOOSING THE FILES.      
+#     - YOU MUST NOT UPDATE any Pricing components.
+#     - YOU MUST UPDATE ONLY the 4 most important components.
+
+#     IDEA 
+#     ----------
+#     {idea}
+# expected_output: >  
+#   Your final answer MUST be ONLY a JSON array of 
+#   components full file paths that need to be updated.
+
 choose_template_task:
   description: >
-    Learn the templates options choose and copy 
-    the one that suits the idea below the best, 
-    YOU MUST COPY the whole folder, location can be found at folder entry in the templates.json, and then YOU MUST read the src/components 
-    in the directory you just copied, to decide what 
-    component files should be updated to make the 
-    landing page about the idea below.
-
-    - YOU MUST READ THE DIRECTORY BEFORE CHOOSING THE FILES.      
-    - YOU MUST NOT UPDATE any Pricing components.
-    - YOU MUST UPDATE ONLY the 4 most important components.
+    Learn the templates options from templates.json and choose
+    the one that suits the idea below the best
 
     IDEA 
     ----------
     {idea}
     
-  expected_output: >  
-    Your final answer MUST be ONLY a JSON array of 
-    components full file paths that need to be updated.
+  expected_output: >
+    Your final answer MUST be the name of the folder of the chosen template ONLY, write it explicitly in the shape of: [chosen template folder name: ...]  
 
+copy_template_task:
+  description: >
+    YOU MUST COPY the whole folder of the chosen template into directory 'workdir',
+    
+  expected_output: >
+    Write explicitly the name of the folder of the chosen template, in the shape of: [chosen template folder name: ...]
+
+choose_relevant_directories_task:
+  description: >
+    Choose 1 or 2 directories from inside './workdir/[chosen_template_folder]' 
+    that are most likely to have the main components for the site.
+
+    RULES
+    --------
+    - DO NOT MAKE UP DIRECTORIES, choose from the ones that are there.
+    - Make sure to REPLACE THE VARIABLE IN SQUARE BRACKETS '[chosen_template_folder]' with the ACTUAL VALUE.
+  
+  expected_output: >
+    Your final answer MUST be the name of directories that you have chosen, 
+    write it explicitly in the shape of: [relevant directories: ...] seperated by commas.
+    Also, write explicitly the name of the folder of the chosen template, in the shape of: [chosen template folder name: ...]
+
+
+choose_components_to_update_task:
+  description: >
+    YOU MUST read the files of '.jsx' or '.tsx' components 
+    inside the relevant directories! to decide what 
+    component files should be updated to make the 
+    landing page about the idea you recieved, look for the idea in your context.
+
+    RULES
+    -------
+    - The path for each individual directory is: './workdir/[chosen_template_folder]/[relevant_directory]'
+    - YOU MUST replace both variables in square brackets '[chosen_template_folder]' and '[relevant_directory]' with the ACTUAL VALUES. 
+    - YOU MUST ONLY READ DIRECTORIES THAT ARE RELEVANT DIRECTORIES.
+    - YOU MUST READ THE DIRECTORY BEFORE CHOOSING THE FILES.      
+    - YOU MUST CHOOSE ONLY the 4 most important components.
+
+  expected_output: >
+    Your final answer MUST be ONLY a JSON array of 
+    components full file paths that need to be updated. Do not write anything else other that the array.
     
 
 update_page_task:
@@ -71,6 +123,7 @@ update_page_task:
     - ALL COMPONENTS USED SHOULD BE IMPORTED, don't make up components.
     - Save the file as with `.jsx` extension.
     - Return the same valid JSON list of the components you got.
+    - YOU MUST NOT UPDATE any Pricing components.
 
     You'll get a $100 tip if you follow all the rules!
 
@@ -88,11 +141,11 @@ update_page_task:
 
     
 
-component_content_task:
+create_component_content_task:
   description: >
-    A engineer will update the {component} (code below),
+    An engineer will update the following component: {component_path} (code below),
     return a list of good options of texts to replace 
-    EACH INDIVIDUAL existing text on the component, 
+    EACH INDIVIDUAL existing text chunk on the component, 
     the suggestion MUST be based on the idea below, 
     and also MUST be similar in length with the original 
     text, we need to replace ALL TEXT.
@@ -107,20 +160,56 @@ component_content_task:
     REACT COMPONENT CONTENT
     -----
     {file_content}
+  expected_output: >
+
+    Your final answer MUST be a JSON array of strings, 
+    each string is a suggestion to replace the text 
+    chunks in the component, the order of the strings 
+    should match the order of the text chunks in the 
+    component.
+
+# update_component_task:
+#   description: >
+#     YOU MUST USE the tool to write an updated 
+#     version of the react component to the file 
+#     system in the following path: {component_path} 
+#     replacing the text content with the suggestions 
+#     provided.
+    
+#     You only modify the text content, you don't add 
+#     or remove any components.
+
+#     RULES
+#     -----
+#     - Remove all the links, this should be single page landing page.
+#     - Don't make up images, videos, gifs, icons, logos, etc.
+#     - keep the same style and tailwind classes.
+#     - MUST HAVE `'use client'` at the be beginning of the code.
+#     - href in buttons, links, NavLinks, and navigations should be `#`.
+#     - NEVER WRITE \\n (newlines as string) on the file, just the code.
+#     - NEVER FORGET TO CLOSE THE FINAL BRACKET (}}) in the file.
+#     - Keep the same component imports and don't use new components.
+#     - NEVER USE COMPONENTS THAT ARE NOT IMPORTED.
+#     - ALL COMPONENTS USED SHOULD BE IMPORTED, don't make up components.
+#     - Save the file as with `.jsx` or '.tsx' extension depending on the component_path extension.
+#     - Use the File Writer Tool to write the file.
+
+#     If you follow the rules I'll give you a $100 tip!!! 
+#     MY LIFE DEPENDS ON YOU FOLLOWING IT!
+  
+#     CONTENT TO BE UPDATED
+#     -----
+#     {file_content}
+#   expected_output: >
+#     You first write the file then your final answer 
+#     MUST be the updated component content.
 
 update_component_task:
   description: >
-    YOU MUST USE the tool to write an updated 
-    version of the react component to the file 
-    system in the following path: {component} 
-    replacing the text content with the suggestions 
-    provided.
+    You must replace the text content in the file content below with the suggestions 
+    provided. Make sure the replacements you make are of similar length.
+    You only modify the text content, you don't add or remove any components.
     
-    You only modify the text content, you don't add 
-    or remove any components.
-    
-    You first write the file then your final answer 
-    MUST be the updated component content.
 
     RULES
     -----
@@ -134,14 +223,33 @@ update_component_task:
     - Keep the same component imports and don't use new components.
     - NEVER USE COMPONENTS THAT ARE NOT IMPORTED.
     - ALL COMPONENTS USED SHOULD BE IMPORTED, don't make up components.
-    - Save the file as with `.jsx` extension.
 
     If you follow the rules I'll give you a $100 tip!!! 
-    MY LIFE DEPENDS ON YOU FOLLOWING IT!
+    MY LIFE DEPENDS ON YOU FOLLOWING THE RULES!
   
     CONTENT TO BE UPDATED
     -----
     {file_content}
+
+  expected_output: >
+    Your final answer MUST ONLY be the updated component content in the following shape: [Updated Component Code: ...]
+
+write_updated_component_task:
+  description: >
+    write the updated component code to the file system in the following path: {component_path}.
+
+    RULES
+    -----
+    - NEVER WRITE \\n (newlines as string) on the file, just the code.
+    - NEVER FORGET TO CLOSE THE FINAL BRACKET (}}) in the file.
+    - Save the file as with `.jsx` or '.tsx' extension depending on the component_path extension.
+    - Use the File Writer Tool to write the file.
+
+    If you follow the rules I'll give you a $100 tip!!! 
+    MY LIFE DEPENDS ON YOU FOLLOWING THE RULES!
+  
+  expected_output: >
+    Your final answer must be if you succeeded in writing the file or not.
 
 qa_component_task:
   description: >
@@ -149,7 +257,7 @@ qa_component_task:
     it's valid and abide by the rules below, 
     if it doesn't then write the correct version to 
     the file system using the write file tool into 
-    the following path: {component}.
+    the following path: {component_path}.
 
      RULES
     -----
