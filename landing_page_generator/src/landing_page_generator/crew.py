@@ -7,6 +7,7 @@ from crewai_tools import SerperDevTool, ScrapeWebsiteTool, DirectoryReadTool, Fi
 from dotenv import load_dotenv
 load_dotenv()
 
+
 @CrewBase
 class ExpandIdeaCrew:
      """ExpandIdea crew"""
@@ -150,7 +151,7 @@ class ChooseTemplateCrew:
             output_log_file='output2.log'
         )
      
-     
+    
 @CrewBase
 class CreateContentCrew:
      """CreateContent crew"""
@@ -219,3 +220,39 @@ class CreateContentCrew:
             verbose=True,
             output_log_file='output3.log'
         )
+     
+@CrewBase
+class testingCrew:
+   """CreateContent crew"""
+   agents_config = 'config/agents.yaml'
+   tasks_config = 'config/tasks.yaml'
+     
+   
+   @agent
+   def senior_react_engineer_agent(self) -> Agent:
+        return Agent(
+             config=self.agents_config['senior_react_engineer'],
+             allow_delegation=False,
+             tools=[
+              FileWriterTool()
+              ],
+             verbose=True
+        )
+     
+   @task
+   def testing_write_to_file(self) -> Task: 
+        return Task(
+            config=self.tasks_config['testing_write_to_file'],
+            agent=self.senior_react_engineer_agent(),
+        )
+   
+   @crew
+   def crew(self) -> Crew:
+      return Crew(
+            agents=self.agents,
+            tasks=self.tasks, 
+            process=Process.sequential,
+            verbose=True,
+            output_log_file='output_test.log'
+        )
+   

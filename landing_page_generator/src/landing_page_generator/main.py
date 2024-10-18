@@ -1,10 +1,11 @@
 import shutil
 import sys
-from crew import ExpandIdeaCrew, ChooseTemplateCrew, CreateContentCrew
+from crew import testingCrew,ExpandIdeaCrew, ChooseTemplateCrew, CreateContentCrew
 from textwrap import dedent
 import os
 import json
 import ast
+from crewai_tools import FileWriterTool
 
 def runExpandIdeaCrew(idea):
   inputs1 = {
@@ -85,10 +86,16 @@ def runCreateContentCrew(component_path, expanded_idea, file_content):
 
 #remove idea as parameter
 def run(idea):
+    file_writer_tool=FileWriterTool()
+    result = file_writer_tool._run(filename="my_file.txt", content="This is some text.",overwrite=False) 
+    print(result)
+    exit(0)
+    testingCrew().crew().kickoff()
+    
     expanded_idea= runExpandIdeaCrew(idea)
     components_paths_list = runChooseTemplateCrew(expanded_idea)
     runCreateContentCrewWrapper(components_paths_list, expanded_idea)
-    exit(0)
+    
 
 # def train():
 #     """

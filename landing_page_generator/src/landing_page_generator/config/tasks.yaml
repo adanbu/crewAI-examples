@@ -168,48 +168,16 @@ create_component_content_task:
     should match the order of the text chunks in the 
     component.
 
-# update_component_task:
-#   description: >
-#     YOU MUST USE the tool to write an updated 
-#     version of the react component to the file 
-#     system in the following path: {component_path} 
-#     replacing the text content with the suggestions 
-#     provided.
-    
-#     You only modify the text content, you don't add 
-#     or remove any components.
-
-#     RULES
-#     -----
-#     - Remove all the links, this should be single page landing page.
-#     - Don't make up images, videos, gifs, icons, logos, etc.
-#     - keep the same style and tailwind classes.
-#     - MUST HAVE `'use client'` at the be beginning of the code.
-#     - href in buttons, links, NavLinks, and navigations should be `#`.
-#     - NEVER WRITE \\n (newlines as string) on the file, just the code.
-#     - NEVER FORGET TO CLOSE THE FINAL BRACKET (}}) in the file.
-#     - Keep the same component imports and don't use new components.
-#     - NEVER USE COMPONENTS THAT ARE NOT IMPORTED.
-#     - ALL COMPONENTS USED SHOULD BE IMPORTED, don't make up components.
-#     - Save the file as with `.jsx` or '.tsx' extension depending on the component_path extension.
-#     - Use the File Writer Tool to write the file.
-
-#     If you follow the rules I'll give you a $100 tip!!! 
-#     MY LIFE DEPENDS ON YOU FOLLOWING IT!
-  
-#     CONTENT TO BE UPDATED
-#     -----
-#     {file_content}
-#   expected_output: >
-#     You first write the file then your final answer 
-#     MUST be the updated component content.
-
 update_component_task:
   description: >
-    You must replace the text content in the file content below with the suggestions 
-    provided. Make sure the replacements you make are of similar length.
-    You only modify the text content, you don't add or remove any components.
+    YOU MUST USE the tool to write an updated 
+    version of the react component to the file 
+    system in the following path: {component_path} 
+    replacing the text content with the suggestions 
+    provided.
     
+    You only modify the text content, you don't add 
+    or remove any components.
 
     RULES
     -----
@@ -223,33 +191,75 @@ update_component_task:
     - Keep the same component imports and don't use new components.
     - NEVER USE COMPONENTS THAT ARE NOT IMPORTED.
     - ALL COMPONENTS USED SHOULD BE IMPORTED, don't make up components.
-
-    If you follow the rules I'll give you a $100 tip!!! 
-    MY LIFE DEPENDS ON YOU FOLLOWING THE RULES!
-  
-    CONTENT TO BE UPDATED
-    -----
-    {file_content}
-
-  expected_output: >
-    Your final answer MUST ONLY be the updated component content in the following shape: [Updated Component Code: ...]
-
-write_updated_component_task:
-  description: >
-    write the updated component code to the file system in the following path: {component_path}.
-
-    RULES
-    -----
-    - NEVER WRITE \\n (newlines as string) on the file, just the code.
-    - NEVER FORGET TO CLOSE THE FINAL BRACKET (}}) in the file.
     - Save the file as with `.jsx` or '.tsx' extension depending on the component_path extension.
     - Use the File Writer Tool to write the file.
 
     If you follow the rules I'll give you a $100 tip!!! 
-    MY LIFE DEPENDS ON YOU FOLLOWING THE RULES!
+    MY LIFE DEPENDS ON YOU FOLLOWING IT!
   
+    CONTENT TO BE UPDATED
+    -----
+    {file_content}
   expected_output: >
-    Your final answer must be if you succeeded in writing the file or not.
+    You first write the file then your final answer 
+    MUST be the updated component content.
+
+# update_component_task:
+#   description: >
+#     You must replace the text content in the file content below with the suggestions 
+#     provided. Make sure the replacements you make are of similar length.
+#     You only modify the text content, you don't add or remove any components.
+    
+
+#     RULES
+#     -----
+#     - Remove all the links, this should be single page landing page.
+#     - Don't make up images, videos, gifs, icons, logos, etc.
+#     - keep the same style and tailwind classes.
+#     - MUST HAVE `'use client'` at the be beginning of the code.
+#     - href in buttons, links, NavLinks, and navigations should be `#`.
+#     - NEVER WRITE \\n (newlines as string) on the file, just the code.
+#     - NEVER FORGET TO CLOSE THE FINAL BRACKET (}}) in the file.
+#     - Keep the same component imports and don't use new components.
+#     - NEVER USE COMPONENTS THAT ARE NOT IMPORTED.
+#     - ALL COMPONENTS USED SHOULD BE IMPORTED, don't make up components.
+
+#     If you follow the rules I'll give you a $100 tip!!! 
+#     MY LIFE DEPENDS ON YOU FOLLOWING THE RULES!
+  
+#     CONTENT TO BE UPDATED
+#     -----
+#     {file_content}
+
+#   expected_output: >
+#     Your final answer MUST ONLY be the updated component content in the following shape: [Updated Component Code: ...]
+
+# write_updated_component_task:
+#   description: >
+#     write the updated component code to the file system in the following path: {component_path}.
+#     Provide the tool with the path to directory and the file name.
+
+#     RULES
+#     -----
+#     - NEVER WRITE \\n (newlines as string) on the file, just the code.
+#     - NEVER FORGET TO CLOSE THE FINAL BRACKET (}}) in the file.
+#     - Use the File Writer Tool to write the file.
+#     - Save the file with the same name and extension as the original file.
+#     -You must provide directory path to the tool input!
+
+#     If you follow the rules I'll give you a $100 tip!!! 
+#     MY LIFE DEPENDS ON YOU FOLLOWING THE RULES!
+  
+#   expected_output: >
+#     Your answer must include the inputs you provided to the tool.
+#     Your final answer must be if you succeeded in writing the file or not.
+#- Save the file as with `.jsx` or '.tsx' extension depending on the component_path extension.
+
+testing_write_to_file:
+  description: >
+    Write to a file called 'test.txt' in your local directory the following text: 'This is a test file'
+  expected_output: >
+    This is a test file written to test.txt in local directory
 
 qa_component_task:
   description: >

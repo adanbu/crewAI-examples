@@ -6,8 +6,8 @@ authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<=3.13"
+crewai = {extras = ["tools"], version = "^0.70.1"}
 python-dotenv = "^1.0.1"
-crewai = {extras = ["tools"], version = "^0.63.6"}
 
 [tool.poetry.scripts]
 landing_page_generator = "landing_page_generator.main:run"
